@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SettingActivity" >
+
+    <TextView
+        android:id="@+id/tvAdvancedId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tvAdvancedLabel"
+        android:textSize="@dimen/activity_vertical_margin"
+        android:textStyle="bold" />
+
+    
+
+    <Spinner
+        android:id="@+id/imageSizeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/imageSizeLabelId"
+        android:layout_alignBottom="@+id/imageSizeLabelId"
+        android:layout_alignParentRight="true"
+        android:entries="@array/imageSizes"
+        android:ems="10" >
+         <requestFocus />
+        </Spinner>
+
+  	<Spinner
+        android:id="@+id/colorFilterId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/colorLabelId"
+        android:layout_alignBottom="@+id/colorLabelId"
+        android:layout_alignParentRight="true"
+        android:entries="@array/colorTypes"
+        android:ems="10" >  
+    </Spinner>
+
+    <TextView
+        android:id="@+id/imageSizeLabelId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvAdvancedId"
+        android:layout_marginTop="20dp"
+        android:text="@string/imageSizeLabel" />
+
+    <TextView
+        android:id="@+id/colorLabelId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageSizeId"
+        android:layout_marginTop="20dp"
+        android:text="@string/colorFilterLabel" />
+
+    <TextView
+        android:id="@+id/imageTypeLabelId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/colorFilterId"
+        android:layout_marginTop="20dp"
+        android:text="@string/imageTypeLabel" />
+
+    <Spinner
+        android:id="@+id/imageTypeId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/imageTypeLabelId"
+        android:layout_alignBottom="@+id/imageTypeLabelId"
+        android:layout_alignParentRight="true"
+        android:entries="@array/imageTypes"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/siteFilterlabelId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageTypeId"
+        android:layout_marginTop="20dp"
+        android:text="@string/siteFilterLabel" />
+
+    <EditText
+        android:id="@+id/siteFilterId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/siteFilterlabelId"
+        android:layout_alignBottom="@+id/siteFilterlabelId"
+        android:layout_alignParentRight="true"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/submitButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvAdvancedId"
+        android:layout_below="@+id/siteFilterId"
+        android:layout_marginTop="32dp"
+        android:layout_toRightOf="@+id/colorLabelId"
+        android:onClick="onFilterImage"
+        android:text="@string/submitLabel" />
+
+</RelativeLayout>

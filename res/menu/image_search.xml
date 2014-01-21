@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   
+    <item
+        android:id="@+id/aiSettingId"
+        android:icon="@drawable/setting_launch"
+        android:showAsAction="ifRoom"
+        android:onClick="onImageSettings"
+        android:title="@string/settingLabel">
+    </item>
+
+</menu>
