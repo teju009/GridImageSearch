@@ -31,23 +31,22 @@ public final class R {
         public static final int setting_launch=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000f;
-        public static final int aiSettingId=0x7f090010;
+        public static final int action_settings=0x7f09000e;
+        public static final int aiSettingId=0x7f09000f;
         public static final int butSearchId=0x7f090002;
-        public static final int colorFilterId=0x7f090008;
-        public static final int colorLabelId=0x7f090009;
+        public static final int colorFilterId=0x7f090007;
+        public static final int colorLabelId=0x7f090008;
         public static final int etQueryId=0x7f090001;
         public static final int gvResultsId=0x7f090003;
-        public static final int imageSizeId=0x7f090006;
-        public static final int imageSizeLabelId=0x7f090007;
-        public static final int imageTypeId=0x7f09000b;
-        public static final int imageTypeLabelId=0x7f09000a;
-        public static final int loadMoreId=0x7f090004;
-        public static final int siteFilterId=0x7f09000d;
-        public static final int siteFilterlabelId=0x7f09000c;
+        public static final int imageSizeId=0x7f090005;
+        public static final int imageSizeLabelId=0x7f090006;
+        public static final int imageTypeId=0x7f09000a;
+        public static final int imageTypeLabelId=0x7f090009;
+        public static final int siteFilterId=0x7f09000c;
+        public static final int siteFilterlabelId=0x7f09000b;
         public static final int sivImageFullId=0x7f090000;
-        public static final int submitButtonId=0x7f09000e;
-        public static final int tvAdvancedId=0x7f090005;
+        public static final int submitButtonId=0x7f09000d;
+        public static final int tvAdvancedId=0x7f090004;
     }
     public static final class layout {
         public static final int activity_image_display=0x7f030000;

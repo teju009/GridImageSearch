@@ -8,14 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ImageDisplay" >
 
-    <com.loopj.android.image.SmartImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sivImageFullId"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:maxWidth="600dp" 
-    android:src="@drawable/screen_background_light">
-	</com.loopj.android.image.SmartImageView>
+    <com.loopj.android.image.SmartImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sivImageFullId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:maxWidth="600dp"
+        android:src="@drawable/screen_background_light" />
     
 </RelativeLayout>

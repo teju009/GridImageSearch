@@ -32,11 +32,11 @@ public class ImageSearchActivity extends Activity {
 	EditText etQuery;
 	GridView gvResults;
 	Button butSearch;
-	Button butLoadMore;
+	
 	ArrayList <Image> imageResults = new ArrayList<Image> ();
 	ImageArrayAdapter imageAdapter;
 	ImageFilter imageFilter;
-	ProgressDialog progressDialog;
+	String query;
 	int imageTracker =0;
 	
 	@Override
@@ -44,18 +44,8 @@ public class ImageSearchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_search);
 		setupViews();
-		imageAdapter = new ImageArrayAdapter(this, imageResults);
-		gvResults.setAdapter(imageAdapter);
-		gvResults.setOnItemClickListener(new OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> adapter, View parent, int position, long rowId) {
-				Intent i = new Intent(getApplicationContext(), ImageDisplay.class);
-				Image imageResultDisplay = imageResults.get(position);
-				i.putExtra("image", imageResultDisplay);
-				startActivity(i);
-			}
-		});
 		
+		//getting the data from the settings activity
 		ImageFilter custFilter = (ImageFilter) getIntent().getSerializableExtra("filterData");
 		if(custFilter == null){
 			imageFilter = new ImageFilter();
@@ -77,25 +67,39 @@ public class ImageSearchActivity extends Activity {
 		etQuery = (EditText) findViewById(R.id.etQueryId);
 		gvResults = (GridView) findViewById(R.id.gvResultsId);
 		butSearch = (Button) findViewById(R.id.butSearchId);
-		butLoadMore = (Button) findViewById(R.id.loadMoreId);
+		
+		gvResults.setOnScrollListener(new EndlessScrollListener(){
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				imageTracker+=8;
+				Log.d("RETURN", "Scroll listener:"+imageTracker);
+				
+				displayImage(imageTracker);
+			}
+		});
+		
+		imageAdapter = new ImageArrayAdapter(this, imageResults);
+		gvResults.setAdapter(imageAdapter);
+		gvResults.setOnItemClickListener(new OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View parent, int position, long rowId) {
+				Intent i = new Intent(getApplicationContext(), ImageDisplay.class);
+				Image imageResultDisplay = imageResults.get(position);
+				i.putExtra("image", imageResultDisplay);
+				startActivity(i);
+			}
+		});
 	}
 	
 	public void onImageSearch(View v) {
-		String query = etQuery.getText().toString();
+		query = etQuery.getText().toString();
+		imageResults.clear();
 		Toast.makeText(this, "Looking for "+query, Toast.LENGTH_SHORT).show();
-		displayImage(imageTracker, query);
-		butLoadMore.setVisibility(View.VISIBLE);
-        
-        butLoadMore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                        // Starting a new async task
-                        new loadMoreListView().execute();
-                }
-        });
+		displayImage(imageTracker);
+		
 	}
 	
-	public void displayImage(int imageTracker, String query){
+	public void displayImage(final int imageTracker){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		Log.d("RETURN", imageFilter.getImageSize());
 		httpClient.get("https://ajax.googleapis.com/ajax/services/search/images?rsz=8&start=" + imageTracker+
@@ -107,7 +111,7 @@ public class ImageSearchActivity extends Activity {
 						JSONArray imageJsonResults = null;
 						try{
 							imageJsonResults = response.getJSONObject("responseData").getJSONArray("results");
-							imageResults.clear();
+							
 							imageAdapter.addAll(Image.jsonArrayToArrayList(imageJsonResults));
 							
 							Log.d("DEBUG", imageResults.toString());
@@ -119,32 +123,6 @@ public class ImageSearchActivity extends Activity {
 				}); 
 	}
 	
-	private class loadMoreListView extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-        	progressDialog = new ProgressDialog(ImageSearchActivity.this);
-            progressDialog.setMessage("Loading..");
-            progressDialog.setIndeterminate(true);
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        protected Void doInBackground(Void... unused) {
-        	runOnUiThread(new Runnable() {
-        		public void run() {
-        			imageTracker += 8;
-                    String query = etQuery.getText().toString();
-                    displayImage(imageTracker, query);
-                }
-        	});
-        	return (null);
-        }
-        
-        protected void onPostExecute(Void unused) {
-                // closing progress dialog
-                progressDialog.dismiss();
-        }
-}
 	
 	public void onImageSettings(MenuItem mi) {
 		
